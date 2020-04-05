@@ -38,6 +38,7 @@ func Router() *gin.Engine {
 
 		pdf, err := GeneratePDF(html)
 		if err != nil {
+			fmt.Println(err)
 			c.Writer.WriteHeader(http.StatusUnprocessableEntity)
 			return
 		}

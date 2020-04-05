@@ -12,17 +12,25 @@ After considering several languages that could fit the purpose and I also could 
 
 1. Clone the repo.
 2. Configure an app on Heroku.
-3. Push to deploy.
+3. Add wkhtmltopdf binary on Heroku.
+```bash
+heroku buildpacks:add https://github.com/dscout/wkhtmltopdf-buildpack.git
+heroku config:set WKHTMLTOPDF_VERSION="0.12.4"
+```
 4. Set ENV vars `USER` and `PASSWORD` to restrict access to your server. Do not set them to leave it open to the whole Internet.
-
+5. Push to deploy.
 
 Refer to [Heroku](https://devcenter.heroku.com/categories/go-support) for extra details and troubleshooting.
+
+If you are going to install it on your own server, ensure wkhtmltopdf library is present.
 
 ## Usage
 
 Make a POST HTTP request to your newly deployed server, eg:
 
-`https://yourapp.herokuapps.com/pdf`
+```
+https://yourapp.herokuapps.com/pdf
+```
 
 Note the path is `/pdf`. You might also need HTTP credentials if you did set them at step 4 above.
 
@@ -37,7 +45,10 @@ Alternatively, you may want to use this [Ruby library](https://github.com/dncrht
 ## Development
 
 Compile and run locally:
-`./build_n_serve`
+
+```
+./build_n_serve
+```
 
 And open http://localhost:5000
 
