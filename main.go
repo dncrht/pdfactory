@@ -21,17 +21,17 @@ func main() {
       user: password,
     }))
   } else {
-    log.Printf("* FREE ACCESS *")
+    log.Printf("* OPEN ACCESS *")
 
     authorized = router.Group("/")
   }
 
-  // / endpoint
-  authorized.GET("/", func(c *gin.Context) {
-    c.String(http.StatusOK, "go away!")
+  // / open endpoint
+  router.GET("/", func(c *gin.Context) {
+    c.String(http.StatusOK, "你好\nHi\nHola")
   })
 
-  // /pdf endpoint
+  // /pdf protected endpoint
   authorized.GET("/pdf", func(c *gin.Context) {
     c.JSON(http.StatusOK, gin.H{"authorized": "yes"})
   })
