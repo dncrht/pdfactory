@@ -43,6 +43,9 @@ And open http://localhost:5000
 
 ## Contributing
 
+Tests are insufficient, but can be run via:
+`go test`
+
 Bug reports and pull requests are welcome on GitHub at https://github.com/dncrht/pdfactory.
 
 ## License

@@ -33,7 +33,7 @@ func Router() *gin.Engine {
 	})
 
 	// /pdf protected endpoint
-	authorized.GET("/pdf", func(c *gin.Context) {
+	authorized.POST("/pdf", func(c *gin.Context) {
 		html := c.PostForm("html")
 
 		pdf, err := GeneratePDF(html)
