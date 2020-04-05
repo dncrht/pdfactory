@@ -1,1 +1,1 @@
-web: bin/pdfactory
+web: bin/server

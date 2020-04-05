@@ -1,13 +1,13 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
-	"log"
 	"net/http"
 	"os"
 )
 
-func main() {
+func setupRouter() *gin.Engine {
 	router := gin.Default()
 
 	user := os.Getenv("USER")
@@ -15,13 +15,13 @@ func main() {
 
 	var authorized *gin.RouterGroup
 	if user != "" && password != "" {
-		log.Printf("* PROTECTED BY USER AND PASSWORD *")
+		fmt.Println("* PROTECTED BY USER AND PASSWORD *")
 
 		authorized = router.Group("/", gin.BasicAuth(gin.Accounts{
 			user: password,
 		}))
 	} else {
-		log.Printf("* OPEN ACCESS *")
+		fmt.Println("* OPEN ACCESS *")
 
 		authorized = router.Group("/")
 	}
@@ -36,5 +36,14 @@ func main() {
 		c.JSON(http.StatusOK, gin.H{"authorized": "yes"})
 	})
 
-	router.Run()
+	return router
+}
+
+func main() {
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "5000"
+	}
+
+	setupRouter().Run(":" + port)
 }
