@@ -36,11 +36,8 @@ Alternatively, you may want to use this [Ruby library](https://github.com/dncrht
 
 ## Development
 
-Compile with:
-`go build -o bin/server -v .`
-
-Then run locally:
-`bin/server`
+Compile and run locally:
+`./build_n_serve`
 
 And open http://localhost:5000
 
