@@ -34,11 +34,13 @@ func Router() *gin.Engine {
 
 	// /pdf protected endpoint
 	authorized.GET("/pdf", func(c *gin.Context) {
-	    pdf, err := GeneratePDF()
-	    if err != nil {
+		html := c.PostForm("html")
+
+		pdf, err := GeneratePDF(html)
+		if err != nil {
 			c.Writer.WriteHeader(http.StatusUnprocessableEntity)
 			return
-	    }
+		}
 
 		c.String(http.StatusOK, base64.StdEncoding.EncodeToString(pdf))
 	})

@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func GeneratePDF() ([]byte, error) {
+func GeneratePDF(html string) ([]byte, error) {
 	pdfg, err := wkhtmltopdf.NewPDFGenerator()
 	if err != nil {
 		return nil, err
@@ -14,7 +14,7 @@ func GeneratePDF() ([]byte, error) {
 	pdfg.Dpi.Set(1200)
 	pdfg.PageSize.Set(wkhtmltopdf.PageSizeA4)
 
-	page := wkhtmltopdf.NewPageReader(strings.NewReader("<i>kk</i>"))
+	page := wkhtmltopdf.NewPageReader(strings.NewReader(html))
 
 	pdfg.AddPage(page)
 

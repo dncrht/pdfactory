@@ -26,7 +26,7 @@ Make a POST HTTP request to your newly deployed server, eg:
 
 Note the path is `/pdf`. You might also need HTTP credentials if you did set them at step 4 above.
 
-Pass a `body` parameter with the HTML code you want to convert to PDF.
+Pass a `html` parameter with the HTML code you want to convert to PDF.
 
 If all goes well, response code will be 200 and the server will reply with the PDF as Base64 encoded text.
 
