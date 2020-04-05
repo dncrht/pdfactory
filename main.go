@@ -2,21 +2,39 @@ package main
 
 import (
   "github.com/gin-gonic/gin"
+  "log"
   "net/http"
+  "os"
 )
 
 func main() {
-	r := gin.Default()
+  router := gin.Default()
 
-	authorized := r.Group("/", gin.BasicAuth(gin.Accounts{
-    "user": "password",
-	}))
+  user := os.Getenv("USER")
+  password := os.Getenv("PASSWORD")
 
-	// /pdf endpoint
-	authorized.GET("/secrets", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"authorized": "yes"})
-	})
+  var authorized *gin.RouterGroup
+  if (user != "" && password != "") {
+    log.Printf("* PROTECTED BY USER AND PASSWORD *")
 
-	// Listen and serve on 0.0.0.0:8080
-	r.Run()
+    authorized = router.Group("/", gin.BasicAuth(gin.Accounts{
+      user: password,
+    }))
+  } else {
+    log.Printf("* FREE ACCESS *")
+
+    authorized = router.Group("/")
+  }
+
+  // / endpoint
+  authorized.GET("/", func(c *gin.Context) {
+    c.String(http.StatusOK, "go away!")
+  })
+
+  // /pdf endpoint
+  authorized.GET("/pdf", func(c *gin.Context) {
+    c.JSON(http.StatusOK, gin.H{"authorized": "yes"})
+  })
+
+  router.Run()
 }
