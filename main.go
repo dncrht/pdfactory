@@ -28,7 +28,7 @@ func main() {
 
   // / open endpoint
   router.GET("/", func(c *gin.Context) {
-    c.String(http.StatusOK, "你好\nHi\nHola")
+    c.String(http.StatusOK, "你好\nHello\nHola")
   })
 
   // /pdf protected endpoint
