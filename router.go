@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/base64"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -33,7 +34,13 @@ func Router() *gin.Engine {
 
 	// /pdf protected endpoint
 	authorized.GET("/pdf", func(c *gin.Context) {
-		c.JSON(http.StatusOK, gin.H{"authorized": "yes"})
+	    pdf, err := GeneratePDF()
+	    if err != nil {
+			c.Writer.WriteHeader(http.StatusUnprocessableEntity)
+			return
+	    }
+
+		c.String(http.StatusOK, base64.StdEncoding.EncodeToString(pdf))
 	})
 
 	return router
