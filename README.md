@@ -22,8 +22,6 @@ heroku config:set WKHTMLTOPDF_VERSION="0.12.4"
 
 Refer to [Heroku](https://devcenter.heroku.com/categories/go-support) for extra details and troubleshooting.
 
-If you are going to install it on your own server, ensure wkhtmltopdf library is present.
-
 ## Usage
 
 Make a POST HTTP request to your newly deployed server, eg:
@@ -44,13 +42,20 @@ Alternatively, you may want to use this [Ruby library](https://github.com/dncrht
 
 ## Development
 
-Compile and run locally:
+Clone locally and install dependencies:
 
+```bash
+go mod vendor
+brew install wkhtmltopdf
 ```
+
+Then compile and run locally:
+
+```bash
 ./build_n_serve
 ```
 
-And open http://localhost:5000
+And open http://localhost:4000
 
 ## Contributing
 
