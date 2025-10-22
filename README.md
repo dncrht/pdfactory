@@ -1,6 +1,6 @@
 # PDFactory
 
-A late jump on the microservices bandwagon (it's been dead for years, hasn't it?), PDFactory allows you to detach PDF generation from your main codebase.
+As a late jump on the microservices bandwagon (it's been dead for years, hasn't it?), PDFactory allows you to detach PDF generation from your main codebase.
 
 The main motivation that drove me to write this service was the humongous size of the Rails app I work with. The deploy slug is 414 MB. And I realised 288 MB of those belong to `wkhtmltopdf`, a gem for PDF generation.
 
